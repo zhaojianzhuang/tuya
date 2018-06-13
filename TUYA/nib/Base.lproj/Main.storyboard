@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="TUYA" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" barStyle="black" translatesAutoresizingMaskIntoConstraints="NO" id="POX-VH-20i">
+                                <rect key="frame" x="16" y="615" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <items>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="zai-gG-ong"/>
+                                    <barButtonItem style="plain" systemItem="trash" id="JgK-LH-Svj" customClass="CommandBarButton"/>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="Rkm-sY-lGS"/>
+                                    <barButtonItem image="save.png" style="plain" id="InK-ck-uoM" customClass="CommandBarButton"/>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="YVy-bA-pTf"/>
+                                    <barButtonItem tag="2" image="open.png" style="plain" id="RN3-pg-Ad8"/>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="T0S-hV-AbK"/>
+                                    <barButtonItem tag="1" image="palette.png" style="plain" id="pxP-s6-bo8"/>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="C9q-Nr-d7l"/>
+                                    <barButtonItem tag="4" image="undo.png" style="plain" id="ZVd-0t-LqX"/>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="5zh-r8-izM"/>
+                                    <barButtonItem tag="5" image="redo.png" style="plain" id="LVs-9o-ZSb"/>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="DXd-za-uGe"/>
+                                </items>
+                            </toolbar>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="open.png" width="24" height="24"/>
+        <image name="palette.png" width="24" height="20"/>
+        <image name="redo.png" width="24" height="24"/>
+        <image name="save.png" width="24" height="24"/>
+        <image name="undo.png" width="24" height="24"/>
+    </resources>
+</document>
