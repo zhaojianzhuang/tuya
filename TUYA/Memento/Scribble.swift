@@ -8,6 +8,8 @@
 
 import UIKit
 
+
+
 class Scribble: NSObject {
     
     fileprivate var parentMark_:Mark         // mark's root node
@@ -63,7 +65,7 @@ class Scribble: NSObject {
     //    add a mark
     //    amark : mark
     //    shouldAddToPreviousMark : add to a previous mark
-    func add(amark:Mark, shouldAddToPreviousMark:Bool) -> Void {
+    func add(amark:Mark, shouldAddToPreviousMark:Bool=false) -> Void {
         
         willChangeValue(forKey: "mark")
         if shouldAddToPreviousMark {
@@ -82,13 +84,14 @@ class Scribble: NSObject {
         }
         willChangeValue(forKey: "mark")
         parentMark_.remove(mark: mark)
+        didChangeValue(forKey: "mark")
         guard let equal = incrementalMark_?.equal(other: mark) else {
             return
         }
         if equal {
             incrementalMark_ = nil
         }
-        didChangeValue(forKey: "mark")
+        
     }
     
     //

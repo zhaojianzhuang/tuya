@@ -37,6 +37,7 @@ class Vertex:NSObject, Mark {
         }
         return true
     }
+    
     //    draw
     func draw(context: CGContext) -> Void  {
         context.addLine(to: location)

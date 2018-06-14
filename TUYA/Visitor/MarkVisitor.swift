@@ -10,6 +10,7 @@ import UIKit
 
 // the protocol for visit the mark data
 // that we can use this protocol to visit mark's data and draw it
+
 protocol MarkVisitor {
     
 //    visit the base mark

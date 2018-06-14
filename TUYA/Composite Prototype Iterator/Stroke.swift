@@ -31,6 +31,24 @@ class Stroke:NSObject, Mark {
     override init() {
         super.init()
     }
+    //  encode
+    func encode(with aCoder: NSCoder) {
+        aCoder.encode(children_, forKey: CODE_MARK_KEY)
+        aCoder.encode(Float(size), forKey: CODE_SIZE_KEY)
+        aCoder.encode(color, forKey: CODE_COLOR_KEY)
+    }
+    
+    //    decode
+    required init?(coder aDecoder: NSCoder) {
+        color = aDecoder.decodeObject(forKey: CODE_COLOR_KEY) as? UIColor
+        size = CGFloat(aDecoder.decodeFloat(forKey: CODE_SIZE_KEY))
+        children_ = aDecoder.decodeObject(forKey: CODE_MARK_KEY) as! [Mark]
+        super.init()
+    }
+
+}
+//MARK:- Mark delegate
+extension Stroke {
     //    visitor
     //    visit stroke that must visit children node
     //    because visit is only render for the stroke
@@ -64,10 +82,13 @@ class Stroke:NSObject, Mark {
     
     //    delete mark
     func remove(mark: Mark) {
-        let indexContain = children_.index(where: {$0.equal(other:mark)})
-        guard let index = indexContain else {
-            print("删除失败")
-            return
+        var index = -1
+        
+        for i in 0..<children_.count {
+            if mark.equal(other: children_[i]) {
+                index = i
+                break
+            }
         }
         children_.remove(at: index)
     }
@@ -91,20 +112,17 @@ class Stroke:NSObject, Mark {
     }
     //    equal
     func equal(other mark: Mark) -> Bool {
-        if color != mark.color {
+        
+        if color != mark.color || size != mark.size || location != mark.location || mark.count != self.count  {
             return false
         }
-        if size != mark.size {
-            return false
-        }
-        if location != mark.location {
-            return false
-        }
-        for mark in children_ {
-            if !equal(other: mark) {
+        
+        for i in 0..<self.count {
+            if !children_[i].equal(other: mark.childMark(index: i)!) {
                 return false
             }
         }
+        
         return true
     }
     
@@ -120,23 +138,13 @@ class Stroke:NSObject, Mark {
         stroke.children_ = children_.map({$0.copy()}) as! [Mark]
         return stroke
     }
-    
-    //  encode
-    func encode(with aCoder: NSCoder) {
-        aCoder.encode(children_, forKey: CODE_MARK_KEY)
-        aCoder.encode(Float(size), forKey: CODE_SIZE_KEY)
-        aCoder.encode(color, forKey: CODE_COLOR_KEY)
-    }
-    
-    //    decode
-    required init?(coder aDecoder: NSCoder) {
-        color = aDecoder.decodeObject(forKey: CODE_COLOR_KEY) as? UIColor
-        size = CGFloat(aDecoder.decodeFloat(forKey: CODE_SIZE_KEY))
-        children_ = aDecoder.decodeObject(forKey: CODE_MARK_KEY) as! [Mark]
-        super.init()
-    }
-    
 }
+
+//MARK:- private
+extension Stroke {
+
+}
+
 
 
 

@@ -23,6 +23,9 @@
 		2280AA1B20D2127100821EF2 /* OpenSetCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2280AA1A20D2127100821EF2 /* OpenSetCommand.swift */; };
 		2280AA1D20D2365800821EF2 /* DismissCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2280AA1C20D2365800821EF2 /* DismissCommand.swift */; };
 		2280AA1F20D2499C00821EF2 /* clear.png in Resources */ = {isa = PBXBuildFile; fileRef = 2280AA1E20D2499C00821EF2 /* clear.png */; };
+		2280AA2120D253E200821EF2 /* UndoCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2280AA2020D253E200821EF2 /* UndoCommand.swift */; };
+		2280AA2520D254D300821EF2 /* RedoCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2280AA2420D254D300821EF2 /* RedoCommand.swift */; };
+		2280AA2720D2927800821EF2 /* MarkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2280AA2620D2927800821EF2 /* MarkError.swift */; };
 		22A0AA2220C8FF9900783CC9 /* CanvasViewGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A0AA2120C8FF9900783CC9 /* CanvasViewGenerator.swift */; };
 		22A0AA2420C9003400783CC9 /* CanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A0AA2320C9003400783CC9 /* CanvasView.swift */; };
 		22A0AA2620C9009900783CC9 /* ClothCanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A0AA2520C9009900783CC9 /* ClothCanvasView.swift */; };
@@ -79,6 +82,9 @@
 		2280AA1A20D2127100821EF2 /* OpenSetCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenSetCommand.swift; sourceTree = "<group>"; };
 		2280AA1C20D2365800821EF2 /* DismissCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DismissCommand.swift; sourceTree = "<group>"; };
 		2280AA1E20D2499C00821EF2 /* clear.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = clear.png; sourceTree = "<group>"; };
+		2280AA2020D253E200821EF2 /* UndoCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UndoCommand.swift; sourceTree = "<group>"; };
+		2280AA2420D254D300821EF2 /* RedoCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedoCommand.swift; sourceTree = "<group>"; };
+		2280AA2620D2927800821EF2 /* MarkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkError.swift; sourceTree = "<group>"; };
 		22A0AA2120C8FF9900783CC9 /* CanvasViewGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasViewGenerator.swift; sourceTree = "<group>"; };
 		22A0AA2320C9003400783CC9 /* CanvasView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasView.swift; sourceTree = "<group>"; };
 		22A0AA2520C9009900783CC9 /* ClothCanvasView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClothCanvasView.swift; sourceTree = "<group>"; };
@@ -149,6 +155,7 @@
 				22591CB120C676410012EDAA /* Stroke.swift */,
 				22DA94C020C7B44B00F91322 /* Dot.swift */,
 				22A0AA2E20C9302C00783CC9 /* MarkEnumerator.swift */,
+				2280AA2620D2927800821EF2 /* MarkError.swift */,
 			);
 			path = "Composite Prototype Iterator";
 			sourceTree = "<group>";
@@ -182,6 +189,8 @@
 				2280AA1820D20F1B00821EF2 /* CommandButtonProtocol.swift */,
 				2280AA1A20D2127100821EF2 /* OpenSetCommand.swift */,
 				2280AA1C20D2365800821EF2 /* DismissCommand.swift */,
+				2280AA2020D253E200821EF2 /* UndoCommand.swift */,
+				2280AA2420D254D300821EF2 /* RedoCommand.swift */,
 			);
 			path = Command;
 			sourceTree = "<group>";
@@ -429,10 +438,12 @@
 				22A0AA2F20C9302C00783CC9 /* MarkEnumerator.swift in Sources */,
 				22591CAB20C6672C0012EDAA /* PaletteThumbnailBaseViewController.swift in Sources */,
 				2280AA1D20D2365800821EF2 /* DismissCommand.swift in Sources */,
+				2280AA2520D254D300821EF2 /* RedoCommand.swift in Sources */,
 				22A0AA3420C94B6D00783CC9 /* MarkRenderer.swift in Sources */,
 				224CBF7320CFB29F006E6ECD /* ProxyError.swift in Sources */,
 				22B96F0120C65DBA001B02E1 /* AppDelegate.swift in Sources */,
 				2280AA1520D1FB5700821EF2 /* ClearScribbleCommand.swift in Sources */,
+				2280AA2120D253E200821EF2 /* UndoCommand.swift in Sources */,
 				22591CAE20C66C640012EDAA /* Mark.swift in Sources */,
 				22591CB020C66E320012EDAA /* Vertex.swift in Sources */,
 				22DA94C420C7C41700F91322 /* ScribbleManager.swift in Sources */,
@@ -459,6 +470,7 @@
 				22D8FA6720D0F77100CCE029 /* ColorChangeView.swift in Sources */,
 				2280AA1920D20F1B00821EF2 /* CommandButtonProtocol.swift in Sources */,
 				22DA94C620C7C42200F91322 /* Scribble.swift in Sources */,
+				2280AA2720D2927800821EF2 /* MarkError.swift in Sources */,
 				2280AA1720D2049600821EF2 /* CommandBarButtonItem.swift in Sources */,
 				2249F29D20C7F7F4001B4CCA /* ScribbleError.swift in Sources */,
 				224CBF7120CFB021006E6ECD /* ScribbleThumbnailViewImageProxy.swift in Sources */,

@@ -13,53 +13,5 @@
             stopOnStyle = "0">
          </BreakpointContent>
       </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TUYA/Command/OpenScribbleCommand.swift"
-            timestampString = "550647676.659552"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "24"
-            endingLineNumber = "24"
-            landmarkName = "execute()"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "TUYA.OpenScribbleCommand.execute() -&gt; ()"
-                  moduleName = "TUYA"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/jianzhuangzhao/Documents/Desktop%20Groups/Code%20/TUYA/TUYA/Command/OpenScribbleCommand.swift"
-                  timestampString = "550653191.547645"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "26"
-                  endingLineNumber = "26"
-                  offsetFromSymbolStart = "355">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "TUYA.OpenScribbleCommand.execute() -&gt; ()"
-                  moduleName = "TUYA"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/jianzhuangzhao/Documents/Desktop%20Groups/Code%20/TUYA/TUYA/Command/OpenScribbleCommand.swift"
-                  timestampString = "550653191.551259"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "26"
-                  endingLineNumber = "26"
-                  offsetFromSymbolStart = "930">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

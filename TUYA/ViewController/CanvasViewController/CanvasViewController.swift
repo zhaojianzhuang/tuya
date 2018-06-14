@@ -8,7 +8,6 @@
 
 import UIKit
 
-
 class CanvasViewController: UIViewController {
     
     var size:CGFloat {
@@ -49,12 +48,6 @@ class CanvasViewController: UIViewController {
         size_ = size < 5.0 ? 5.0 : size
         strokeColor = UIColor(red: red, green: green, blue: blue, alpha: 1)
     }
-    @IBAction func BarButtonItem(_ sender: Any) {
-        
-    }
-    
-    
-    
 }
 
 //MARK:- override
@@ -69,31 +62,50 @@ extension CanvasViewController {
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         
         endPoint_ = touches.first?.previousLocation(in: canvasView)
+        
         guard let startPoint = startPoint_ else { return }
         guard let endPoint = endPoint_ else { return }
-        //       during moving if before point equal to this point that can think of a new stroke coming into being
+        //    during moving if before point equal to this point that can think of a new stroke coming into being
         if endPoint.equalTo(startPoint) {
             let newStroke = Stroke()
             newStroke.color = strokeColor
             newStroke.size = size_
+            undoManager?.registerUndo(withTarget: self, selector: #selector(remove(obj:)), object: newStroke)
+            //            undoManager?.prepare(withInvocationTarget: scribble)
             scribble.add(amark: newStroke, shouldAddToPreviousMark: false)
         }
         let point = touches.first?.location(in: canvasView)
         guard let thisPoint = point else { return   }
         let vertex = Vertex(location: thisPoint)
+        
+        //        undoManager?.registerUndo(withTarget: self, selector: #selector(remove(obj:)), object: vertex)
         scribble.add(amark: vertex, shouldAddToPreviousMark: true)
     }
+    @objc func remove(obj:NSObject) -> Void {
+        //        scribble.remove(mark: mark)
+        guard let mark = obj as? Mark else {return}
+        
+        scribble.remove(mark: mark)
+        undoManager?.registerUndo(withTarget: self, selector: #selector(add(obj:)), object: mark)
+    }
+    @objc func add(obj:NSObject) -> Void {
+        guard let mark = obj as? Mark else {return}
+        scribble.add(amark: mark)
+        undoManager?.registerUndo(withTarget: self, selector: #selector(remove(obj:)), object: mark)
+    }
+    
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         //
         let last = touches.first?.previousLocation(in: canvasView)
         let this = touches.first?.location(in: canvasView)
         guard let lastPoint = last else { return  }
         guard let thisPoint = this else { return  }
-        //        in the end if before point equal to this point that can think of a dot
+        //    in the end if before point equal to this point that can think of a dot
         if lastPoint.equalTo(thisPoint) {
             let singleDot = Dot(location: thisPoint)
             singleDot.color = strokeColor
             singleDot.size = size_
+            undoManager?.registerUndo(withTarget: self, selector: #selector(remove(obj:)), object: singleDot)
             scribble.add(amark: singleDot, shouldAddToPreviousMark: false)
         }
         startPoint_ = CGPoint.zero
@@ -108,7 +120,6 @@ extension CanvasViewController {
             let newchange = dic[NSKeyValueChangeKey.newKey]
             guard let mark = newchange as? Mark else { return }
             canvasView?.mark = mark
-            
             canvasView?.setNeedsDisplay()
         }
     }
@@ -137,10 +148,13 @@ extension CanvasViewController {
         let setCommand = OpenSetCommand()
         //        set
         let setItem = CommandBarButtonItem(command: setCommand, image: UIImage(named: "palette.png"), style: .done, target: CoordinatingController.default, action: #selector(CoordinatingController.requestChange(button:)), title: nil)
+        
+        let undoCommand = UndoCommand(delegate: self)
         //        undo
-        let undoItem = CommandBarButtonItem(command: nil, image: UIImage(named: "undo.png"), style: .done, target: CoordinatingController.default, action: #selector(CoordinatingController.requestChange(button:)), title: nil)
-        //        undo
-        let redoItem = CommandBarButtonItem(command: nil, image: UIImage(named: "redo.png"), style: .done, target: CoordinatingController.default, action: #selector(CoordinatingController.requestChange(button:)), title: nil)
+        let undoItem = CommandBarButtonItem(command: undoCommand, image: UIImage(named: "undo.png"), style: .done, target: CoordinatingController.default, action: #selector(CoordinatingController.requestChange(button:)), title: nil)
+        //        redo
+        let redoCommand = RedoCommand(delegate: self)
+        let redoItem = CommandBarButtonItem(command: redoCommand, image: UIImage(named: "redo.png"), style: .done, target: CoordinatingController.default, action: #selector(CoordinatingController.requestChange(button:)), title: nil)
         //        flex
         let flexItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: self, action: nil)
         
@@ -148,7 +162,18 @@ extension CanvasViewController {
         view.addSubview(toolbar)
     }
 }
-
+//MARK:-RedoCommandDelegate
+extension CanvasViewController:RedoCommandDelegate {
+    func redo(command:Command) -> Void {
+        undoManager?.redo()
+    }
+}
+//MARK:-UndoCommandDelegate
+extension CanvasViewController:UndoCommandDelegate {
+    func undo(command:Command) -> Void {
+        undoManager?.undo()
+    }
+}
 //MARK:- privae
 extension CanvasViewController {
     fileprivate func loadCanvasView(type:CanvasViewType) -> Void {
@@ -158,11 +183,3 @@ extension CanvasViewController {
         view.addSubview(canvasView!)
     }
 }
-
-
-
-
-
-
-
-
