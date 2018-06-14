@@ -12,6 +12,8 @@ import UIKit
 
 
 class ColorChangeView: UIView {
+    
+    //   command for value changed
     var command:Command?
     
     let sliderViewWidth:CGFloat = 200.0
@@ -24,6 +26,7 @@ class ColorChangeView: UIView {
     
     var colorView:UIView?
     var sliders:[UISlider]=[UISlider]()
+    //    MARK:-init
     override init(frame: CGRect) {
         super.init(frame: frame)
         initUI()

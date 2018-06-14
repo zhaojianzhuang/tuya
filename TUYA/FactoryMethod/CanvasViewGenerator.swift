@@ -14,6 +14,7 @@ enum CanvasViewType {
 }
 //CanvasView factory 
 class CanvasViewGenerator: NSObject {
+    
     class func create(frame:CGRect, type:CanvasViewType) -> CanvasView{
         switch type {
         case .cloth:

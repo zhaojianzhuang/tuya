@@ -8,11 +8,7 @@
 
 import UIKit
 
-enum ButtonTag:Int {
-    case kButtonTagDone, // 完成
-    kButtonTagOpenPaletteView, // 打开颜色
-    kButtonTagOpenThumbnailView // 打开缩略图
-}
+
 
 //适配action
 class CoordinatingController: NSObject

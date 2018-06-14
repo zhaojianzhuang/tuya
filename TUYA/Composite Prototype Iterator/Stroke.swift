@@ -32,6 +32,9 @@ class Stroke:NSObject, Mark {
         super.init()
     }
     //    visitor
+    //    visit stroke that must visit children node
+    //    because visit is only render for the stroke
+    //    do not add line and move to line
     func accept(visitor: MarkVisitor) -> Void {
         
         for mark in children_ {
@@ -50,7 +53,7 @@ class Stroke:NSObject, Mark {
             }
         }
     }
-    //     enumerator
+    //    enumerator
     func enumerator() -> NSEnumerator? {
         return MarkEnumerator(mark: self)
     }
@@ -134,6 +137,7 @@ class Stroke:NSObject, Mark {
     }
     
 }
+
 
 
 

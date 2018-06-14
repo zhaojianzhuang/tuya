@@ -7,9 +7,12 @@
 //
 
 import UIKit
-//为UIBarButtonItem扩充一个command的属性
+//   extension a command property for UIBarButtonItem
+//   that we handle the action that can use command.execute()
 class CommandBarButtonItem: UIBarButtonItem, CommandButtonProtocol {
+    
     open var command:Command?
+    
     init(command:Command?, image: UIImage?, style: UIBarButtonItemStyle, target: Any?, action: Selector?, title:String?) {
         super.init()
         self.image = image

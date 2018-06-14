@@ -9,6 +9,10 @@
 import UIKit
 
 class SizeChangeView: UIView {
+    
+    //   command for value changed
+    var command:Command?
+    
     var slider:UISlider?
     var leftView:UIView?
     var rightView:UIView?
@@ -18,7 +22,7 @@ class SizeChangeView: UIView {
     let sliderWidth:CGFloat = 170.0
     let leftViewWidth:CGFloat = 10
     let rightViewWidth:CGFloat = 20
-    var command:Command? //用来执行滑动的命令
+
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -94,6 +98,7 @@ extension SizeChangeView {
         addSubview(sizeView!)
     }
 }
+
 
 
 

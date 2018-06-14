@@ -18,7 +18,7 @@ class PaletteThumbnailBaseViewController: UIViewController {
     
     func doneInit() -> Void {
         let dismissCommand = DismissCommand()
-        let item = CommandBarButtonItem(command: dismissCommand, image: nil, style: .done, target: CoordinatingController.default, action: #selector(CoordinatingController.requestChange(button:)), title: "完成")
+        let item = CommandBarButtonItem(command: dismissCommand, image: nil, style: .done, target: CoordinatingController.default, action: #selector(CoordinatingController.requestChange(button:)), title: "completion")
 
         self.navigationItem.rightBarButtonItem = item
     }

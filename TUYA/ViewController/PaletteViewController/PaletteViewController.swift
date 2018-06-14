@@ -9,8 +9,11 @@
 import UIKit
 
 class PaletteViewController: PaletteThumbnailBaseViewController {
+    
     let colorChangeView = ColorChangeView(frame: CGRect(x: 0, y: 20, width: SCREEN_WIDTH, height: 200))
+    
     let sizeChangeView = SizeChangeView(frame: CGRect(x: 0, y: SCREEN_Height / 2, width: SCREEN_WIDTH, height: 100))
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = "setting up"

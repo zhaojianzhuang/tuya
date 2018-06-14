@@ -22,6 +22,7 @@
 		2280AA1920D20F1B00821EF2 /* CommandButtonProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2280AA1820D20F1B00821EF2 /* CommandButtonProtocol.swift */; };
 		2280AA1B20D2127100821EF2 /* OpenSetCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2280AA1A20D2127100821EF2 /* OpenSetCommand.swift */; };
 		2280AA1D20D2365800821EF2 /* DismissCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2280AA1C20D2365800821EF2 /* DismissCommand.swift */; };
+		2280AA1F20D2499C00821EF2 /* clear.png in Resources */ = {isa = PBXBuildFile; fileRef = 2280AA1E20D2499C00821EF2 /* clear.png */; };
 		22A0AA2220C8FF9900783CC9 /* CanvasViewGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A0AA2120C8FF9900783CC9 /* CanvasViewGenerator.swift */; };
 		22A0AA2420C9003400783CC9 /* CanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A0AA2320C9003400783CC9 /* CanvasView.swift */; };
 		22A0AA2620C9009900783CC9 /* ClothCanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A0AA2520C9009900783CC9 /* ClothCanvasView.swift */; };
@@ -77,6 +78,7 @@
 		2280AA1820D20F1B00821EF2 /* CommandButtonProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CommandButtonProtocol.swift; path = TUYA/CommandButtonProtocol.swift; sourceTree = SOURCE_ROOT; };
 		2280AA1A20D2127100821EF2 /* OpenSetCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenSetCommand.swift; sourceTree = "<group>"; };
 		2280AA1C20D2365800821EF2 /* DismissCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DismissCommand.swift; sourceTree = "<group>"; };
+		2280AA1E20D2499C00821EF2 /* clear.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = clear.png; sourceTree = "<group>"; };
 		22A0AA2120C8FF9900783CC9 /* CanvasViewGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasViewGenerator.swift; sourceTree = "<group>"; };
 		22A0AA2320C9003400783CC9 /* CanvasView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasView.swift; sourceTree = "<group>"; };
 		22A0AA2520C9009900783CC9 /* ClothCanvasView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClothCanvasView.swift; sourceTree = "<group>"; };
@@ -243,6 +245,7 @@
 		22B96ED420C65DBA001B02E1 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				2280AA1E20D2499C00821EF2 /* clear.png */,
 				22B96ED520C65DBA001B02E1 /* palette.png */,
 				22B96ED620C65DBA001B02E1 /* large_dot.png */,
 				22B96ED720C65DBA001B02E1 /* placeholder.png */,
@@ -406,6 +409,7 @@
 				22B96EFE20C65DBA001B02E1 /* Assets.xcassets in Resources */,
 				22B96EFB20C65DBA001B02E1 /* background_texture.png in Resources */,
 				22B96EF720C65DBA001B02E1 /* placeholder.png in Resources */,
+				2280AA1F20D2499C00821EF2 /* clear.png in Resources */,
 				22B96EF620C65DBA001B02E1 /* large_dot.png in Resources */,
 				22B96EFA20C65DBA001B02E1 /* redo.png in Resources */,
 				22B96EFF20C65DBA001B02E1 /* LaunchScreen.storyboard in Resources */,

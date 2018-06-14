@@ -127,7 +127,7 @@ extension CanvasViewController {
         
         let clearCommand = ClearScribbleCommand()
         //    clear
-        let trashItem = CommandBarButtonItem(command: clearCommand, image: nil, style: .done, target: CoordinatingController.default, action: #selector(CoordinatingController.requestChange(button:)), title: "delete")
+        let trashItem = CommandBarButtonItem(command: clearCommand, image: UIImage(named: "clear.png"), style: .done, target: CoordinatingController.default, action: #selector(CoordinatingController.requestChange(button:)), title: nil)
         let saveCommand = SaveScribbleCommand()
         //        save
         let saveItem = CommandBarButtonItem(command: saveCommand, image: UIImage(named: "save.png"), style: .done, target: CoordinatingController.default, action: #selector(CoordinatingController.requestChange(button:)), title: nil)
