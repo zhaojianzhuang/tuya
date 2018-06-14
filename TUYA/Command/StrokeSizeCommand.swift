@@ -30,7 +30,7 @@ class StrokeSizeCommand: NSObject, Command {
         delegate?.request(forStroke: &size, command: self)
         provider?(&size)
         let vc = CoordinatingController.default.canvasViewController
-        let strokeSize = size * 20 + 5
+        let strokeSize = size * (STROKE_SIZE_MAX  - STROKE_SIZE_MIN) + STROKE_SIZE_MIN
         vc.size = strokeSize
         delegate?.update(command:self , size: strokeSize)
         

@@ -18,7 +18,8 @@ class SizeChangeView: UIView {
     let sliderWidth:CGFloat = 170.0
     let leftViewWidth:CGFloat = 10
     let rightViewWidth:CGFloat = 20
-    var command:Command?
+    var command:Command? //用来执行滑动的命令
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         initUI()
@@ -81,7 +82,10 @@ extension SizeChangeView {
         addSubview(rightView!)
         let userDefaults = UserDefaults.standard
         let size = userDefaults.float(forKey: CODE_SIZE_KEY)
-        let height = size == 0 ? 5 : size
+        let height = size == 0 ? Float(STROKE_SIZE_MIN) : size
+        slider?.value = size / Float(STROKE_SIZE_MAX - STROKE_SIZE_MIN)
+        
+        
         sizeView = UIView(frame: CGRect(x: 0,
                                         y: titleLabbelHegiht + 5 + 5 + sliderViewHeight,
                                         width: frame.width,

@@ -29,7 +29,7 @@ class CanvasViewController: UIViewController {
     let toolbar_Hegiht:CGFloat = 60
     var scribble = Scribble()
     var canvasView:CanvasView?
-//    fileprivate var color_:UIColor?
+    //    fileprivate var color_:UIColor?
     fileprivate var size_:CGFloat = 5.0
     
     fileprivate var startPoint_:CGPoint?
@@ -53,20 +53,25 @@ class CanvasViewController: UIViewController {
         
     }
     
-
+    
     
 }
 
 //MARK:- override
 extension CanvasViewController {
+    func clearScribble() -> Void {
+        scribble.clear()
+    }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         startPoint_ = touches.first?.location(in: canvasView)
     }
+    
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-
+        
         endPoint_ = touches.first?.previousLocation(in: canvasView)
         guard let startPoint = startPoint_ else { return }
         guard let endPoint = endPoint_ else { return }
+        //       during moving if before point equal to this point that can think of a new stroke coming into being
         if endPoint.equalTo(startPoint) {
             let newStroke = Stroke()
             newStroke.color = strokeColor
@@ -79,11 +84,12 @@ extension CanvasViewController {
         scribble.add(amark: vertex, shouldAddToPreviousMark: true)
     }
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
+        //
         let last = touches.first?.previousLocation(in: canvasView)
         let this = touches.first?.location(in: canvasView)
         guard let lastPoint = last else { return  }
         guard let thisPoint = this else { return  }
+        //        in the end if before point equal to this point that can think of a dot
         if lastPoint.equalTo(thisPoint) {
             let singleDot = Dot(location: thisPoint)
             singleDot.color = strokeColor
@@ -110,11 +116,8 @@ extension CanvasViewController {
 
 
 extension CanvasViewController {
-    
-    
-    
     @objc fileprivate func barButtonItem(_ sender:UIBarButtonItem) -> Void{
-        CoordinatingController.default.requestChange(object: sender)
+        //        CoordinatingController.default.requestChange(button: sender)
     }
     fileprivate func initToolbar()->Void {
         let toolbar = UIToolbar(frame: CGRect(x: 0,
@@ -122,26 +125,26 @@ extension CanvasViewController {
                                               width: SCREEN_WIDTH,
                                               height: toolbar_Hegiht))
         
-        //        删除
-        let trash = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.trash, target: self, action: #selector(barButtonItem(_:)))
+        let clearCommand = ClearScribbleCommand()
+        //    clear
+        let trashItem = CommandBarButtonItem(command: clearCommand, image: nil, style: .done, target: CoordinatingController.default, action: #selector(CoordinatingController.requestChange(button:)), title: "delete")
+        let saveCommand = SaveScribbleCommand()
+        //        save
+        let saveItem = CommandBarButtonItem(command: saveCommand, image: UIImage(named: "save.png"), style: .done, target: CoordinatingController.default, action: #selector(CoordinatingController.requestChange(button:)), title: nil)
+        //        open
+        let openItem = CommandBarButtonItem(command: nil, image: UIImage(named: "open.png"), style: .done, target: CoordinatingController.default, action: #selector(CoordinatingController.requestChange(button:)), title: nil)
         
-        //        保存
-        let save = UIBarButtonItem(image: UIImage(named: "save.png") , style: UIBarButtonItemStyle.done, target: self, action: #selector(barButtonItem(_:)))
+        let setCommand = OpenSetCommand()
+        //        set
+        let setItem = CommandBarButtonItem(command: setCommand, image: UIImage(named: "palette.png"), style: .done, target: CoordinatingController.default, action: #selector(CoordinatingController.requestChange(button:)), title: nil)
+        //        undo
+        let undoItem = CommandBarButtonItem(command: nil, image: UIImage(named: "undo.png"), style: .done, target: CoordinatingController.default, action: #selector(CoordinatingController.requestChange(button:)), title: nil)
+        //        undo
+        let redoItem = CommandBarButtonItem(command: nil, image: UIImage(named: "redo.png"), style: .done, target: CoordinatingController.default, action: #selector(CoordinatingController.requestChange(button:)), title: nil)
+        //        flex
+        let flexItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: self, action: nil)
         
-        //        打开
-        let open = UIBarButtonItem(image: UIImage(named: "open.png") , style: UIBarButtonItemStyle.done, target: CoordinatingController.default, action: #selector(CoordinatingController.requestChange(object:)))
-        open.tag = ButtonTag.kButtonTagOpenThumbnailView.rawValue
-        
-        //        颜色
-        let palette = UIBarButtonItem(image: UIImage(named: "palette.png") , style: UIBarButtonItemStyle.done, target: CoordinatingController.default, action: #selector(CoordinatingController.requestChange(object:)))
-        palette.tag = ButtonTag.kButtonTagOpenPaletteView.rawValue
-        
-        let undo = UIBarButtonItem(image: UIImage(named: "undo.png") , style: UIBarButtonItemStyle.done, target: self, action: #selector(barButtonItem(_:)))
-        let redo = UIBarButtonItem(image: UIImage(named: "redo.png") , style: UIBarButtonItemStyle.done, target: self, action: #selector(barButtonItem(_:)))
-        //
-        let flex = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: self, action: nil)
-        
-        toolbar.items = [flex, trash, flex, save, flex, open, flex, palette, flex, undo, flex, redo, flex]
+        toolbar.items = [flexItem, trashItem, flexItem, saveItem, flexItem, openItem, flexItem, setItem, flexItem, undoItem, flexItem, redoItem, flexItem]
         view.addSubview(toolbar)
     }
 }
@@ -150,9 +153,16 @@ extension CanvasViewController {
 extension CanvasViewController {
     fileprivate func loadCanvasView(type:CanvasViewType) -> Void {
         canvasView = CanvasViewGenerator.create(frame: CGRect(x: 0, y: 0,
-                                                                  width: SCREEN_WIDTH, height: SCREEN_Height) ,
-                                                    type: CanvasViewType.cloth)
+                                                              width: SCREEN_WIDTH, height: SCREEN_Height) ,
+                                                type: CanvasViewType.cloth)
         view.addSubview(canvasView!)
     }
 }
+
+
+
+
+
+
+
 

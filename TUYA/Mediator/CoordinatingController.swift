@@ -14,7 +14,7 @@ enum ButtonTag:Int {
     kButtonTagOpenThumbnailView // 打开缩略图
 }
 
-//适配主页跳转的类
+//适配action
 class CoordinatingController: NSObject
 {
     static let `default` = CoordinatingController()
@@ -40,36 +40,18 @@ class CoordinatingController: NSObject
         super.init()
     }
     
+    func present(viewController:UIViewController, animated:Bool, completion:(()->Void)?) -> Void {
+            activeViewController_ = viewController
+            canvasViewController_.present(viewController, animated: true, completion: completion)
+    }
+    
+    
     func set(activeViewController:UIViewController) -> Void {
         activeViewController_ = activeViewController
     }
 //    控制跳转的逻辑
-    @objc func requestChange(object:Any) -> Void {
-        
-        guard let barButton = object as? UIBarButtonItem else {
-            canvasViewController_.dismiss(animated: true, completion: nil)
-            activeViewController_ = canvasViewController_
-            return
-        }
-        
-        switch barButton.tag {
-        case ButtonTag.kButtonTagOpenPaletteView.rawValue:
-            let palletvc = PaletteViewController()
-            activeViewController_ = palletvc
-            
-            canvasViewController_.present(UINavigationController(rootViewController: palletvc), animated: true, completion: nil)
-            break
-        case ButtonTag.kButtonTagOpenThumbnailView.rawValue:
-            let thumailVC = ThumbnailViewController()
-            activeViewController_ = thumailVC
-            canvasViewController_.present(UINavigationController(rootViewController: thumailVC), animated: true , completion: nil)
-            break
-        default:
-            canvasViewController_.dismiss(animated: true, completion: nil)
-            activeViewController_ = canvasViewController_
-            break
-        }
-        
+    @objc func requestChange(button:CommandButtonProtocol) -> Void {
+        button.command?.execute()
     }
     
 }

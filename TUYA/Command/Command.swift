@@ -7,7 +7,8 @@
 //
 
 import UIKit
-protocol Command {
+
+@objc protocol Command {
     var userinfo:[String:Any]? {get set}
     func execute() -> Void
     func undo() -> Void

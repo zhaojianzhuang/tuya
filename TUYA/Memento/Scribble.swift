@@ -10,12 +10,14 @@ import UIKit
 
 class Scribble: NSObject {
     
-    fileprivate var parentMark_:Mark
-    fileprivate var incrementalMark_:Mark?
+    fileprivate var parentMark_:Mark         // mark's root node
+    fileprivate var incrementalMark_:Mark?   //use to sign incremental mark
     
+    //    use to handle observer
+    //    visit is parentMark_
     @objc dynamic var mark:NSObject {
         get {
-            return parentMark_ as! NSObject
+            return parentMark_ as! NSObject  // in swift observer must obvious be NSObject
         }
     }
     
@@ -25,10 +27,12 @@ class Scribble: NSObject {
         }
     }
     
+    //    MARK:- init
     override init() {
         parentMark_ = Stroke()
         super.init()
     }
+    
     
     init(memento:ScribbleMemento) {
         
@@ -44,10 +48,21 @@ class Scribble: NSObject {
         }
     }
     
+    //    clear all mark
+    func clear() -> Void {
+        willChangeValue(forKey: "mark")
+        parentMark_ = Stroke()
+        incrementalMark_ = parentMark_
+        didChangeValue(forKey: "mark")
+    }
+    
+    //    open a local save
     func attachState(from memento:ScribbleMemento) -> Void {
         add(amark: memento.mark, shouldAddToPreviousMark: false)
     }
-    
+    //    add a mark
+    //    amark : mark
+    //    shouldAddToPreviousMark : add to a previous mark
     func add(amark:Mark, shouldAddToPreviousMark:Bool) -> Void {
         
         willChangeValue(forKey: "mark")
@@ -59,7 +74,7 @@ class Scribble: NSObject {
         }
         didChangeValue(forKey: "mark")
     }
-    
+    //    remvoe a mark
     func remove(mark:Mark) -> Void {
         if mark.equal(other: parentMark_) {
             print("remove mark error")
@@ -76,6 +91,7 @@ class Scribble: NSObject {
         didChangeValue(forKey: "mark")
     }
     
+    //
     func scribbleMemento(hasCompleteSnapshot:Bool) throws -> ScribbleMemento {
         guard var mementoMark = incrementalMark_ else {
             throw ScribbleError.incrementalEmptyError
@@ -86,6 +102,10 @@ class Scribble: NSObject {
         return ScribbleMemento(mementoMark)
     }
     
-    
 }
+
+
+
+
+
 

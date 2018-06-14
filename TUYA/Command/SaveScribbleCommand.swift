@@ -10,16 +10,12 @@ import UIKit
 
 class SaveScribbleCommand: NSObject{
     var userinfo: [String : Any]?
-
+   
     
 
 }
 
 extension SaveScribbleCommand:Command {
-    
-    
-
-    
     func execute() -> Void {
         let canvasVC = CoordinatingController.default.canvasViewController
 //        canvasVC.s

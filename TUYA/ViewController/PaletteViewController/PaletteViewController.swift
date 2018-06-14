@@ -13,11 +13,11 @@ class PaletteViewController: PaletteThumbnailBaseViewController {
     let sizeChangeView = SizeChangeView(frame: CGRect(x: 0, y: SCREEN_Height / 2, width: SCREEN_WIDTH, height: 100))
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.title = "setting up"
         view.backgroundColor = UIColor.white
         self.edgesForExtendedLayout = UIRectEdge.bottom
         view.addSubview(colorChangeView)
         view.addSubview(sizeChangeView)
-        
     }
     
 }

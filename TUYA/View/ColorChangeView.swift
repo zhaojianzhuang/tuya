@@ -13,6 +13,7 @@ import UIKit
 
 class ColorChangeView: UIView {
     var command:Command?
+    
     let sliderViewWidth:CGFloat = 200.0
     let topBottomHeight:CGFloat = 5.0
     let titleLabbelHegiht:CGFloat = 20.0
@@ -45,7 +46,7 @@ extension ColorChangeView:StrokeColorCommandDelegate {
         blue = CGFloat(self.sliders[2].value)
     }
 }
-//MARK: -private
+//MARK:- private
 extension ColorChangeView {
     @objc fileprivate func valuechange(slider:UISlider) -> Void {
         command?.execute()
@@ -61,7 +62,7 @@ extension ColorChangeView {
         let red = userDefaults.float(forKey: CODE_RED_KEY)
         let green = userDefaults.float(forKey: CODE_GREEN_KEY)
 //        let size = CGFloat(userDefaults.float(forKey: CODE_SIZE_KEY))
-        let colors = [red, blue, green]
+        let colors = [red, green, blue]
         for i in 0..<3 {
             let label  = UILabel(frame: CGRect(x: (frame.width - sliderViewWidth) / 2,
                                                y: titleLabbelHegiht + topBottomHeight + (sliderViewHeight + topBottomHeight) * CGFloat(i),
@@ -87,7 +88,7 @@ extension ColorChangeView {
         
         colorView?.backgroundColor = UIColor.init(red: CGFloat(sliders[0].value),
                                                   green: CGFloat(sliders[1].value),
-                                                  blue: CGFloat(sliders[1].value),
+                                                  blue: CGFloat(sliders[2].value),
                                                   alpha: 1)
         addSubview(colorView!)
     }

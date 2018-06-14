@@ -12,8 +12,8 @@ import UIKit
 enum CanvasViewType {
     case cloth, paper
 }
+//CanvasView factory 
 class CanvasViewGenerator: NSObject {
-    
     class func create(frame:CGRect, type:CanvasViewType) -> CanvasView{
         switch type {
         case .cloth:

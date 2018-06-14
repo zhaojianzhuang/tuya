@@ -9,7 +9,8 @@
 import UIKit
 
 class CanvasView: UIView {
-    var mark:Mark?
+    var mark:Mark? //绘制的数据
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
@@ -18,6 +19,7 @@ class CanvasView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    //    绘制
     override func draw(_ rect: CGRect) {
         guard let context = UIGraphicsGetCurrentContext() else { return }
         let markRender = MarkRenderer(context: context)
@@ -25,3 +27,4 @@ class CanvasView: UIView {
     }
     
 }
+

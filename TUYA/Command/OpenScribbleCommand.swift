@@ -21,7 +21,8 @@ class OpenScribbleCommand<T>: Command where T:ScribbleSource {
             let scribble = try aScribbleSource_.scribble()
             let coordinateVC = CoordinatingController.default
             coordinateVC.canvasViewController.scribble = scribble
-            coordinateVC.requestChange(object: self)
+            
+//            coordinateVC.requestChange(object: self)
         } catch  {
             print("\(error)")
         }

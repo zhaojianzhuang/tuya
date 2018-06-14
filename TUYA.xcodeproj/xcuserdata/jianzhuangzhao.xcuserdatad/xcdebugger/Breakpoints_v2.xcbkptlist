@@ -19,30 +19,46 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "TUYA/Visitor/MarkRenderer.swift"
-            timestampString = "550587986.308254"
+            filePath = "TUYA/Command/OpenScribbleCommand.swift"
+            timestampString = "550647676.659552"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "42"
-            endingLineNumber = "42"
-            landmarkName = "visit(stroke:)"
+            startingLineNumber = "24"
+            endingLineNumber = "24"
+            landmarkName = "execute()"
             landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TUYA/ViewController/CanvasViewController/CanvasViewController.swift"
-            timestampString = "550587986.308319"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "74"
-            endingLineNumber = "74"
-            landmarkName = "touchesMoved(_:with:)"
-            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "TUYA.OpenScribbleCommand.execute() -&gt; ()"
+                  moduleName = "TUYA"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jianzhuangzhao/Documents/Desktop%20Groups/Code%20/TUYA/TUYA/Command/OpenScribbleCommand.swift"
+                  timestampString = "550649952.445684"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "26"
+                  endingLineNumber = "26"
+                  offsetFromSymbolStart = "355">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "TUYA.OpenScribbleCommand.execute() -&gt; ()"
+                  moduleName = "TUYA"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jianzhuangzhao/Documents/Desktop%20Groups/Code%20/TUYA/TUYA/Command/OpenScribbleCommand.swift"
+                  timestampString = "550649952.448007"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "26"
+                  endingLineNumber = "26"
+                  offsetFromSymbolStart = "930">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
