@@ -7,10 +7,26 @@
 //
 
 import UIKit
+//   Scribble delegate for revocation last add
+protocol ScribbleRevocationDelegate:NSObjectProtocol {
+    func revocation(scribble:Scribble?, manager:UndoManager, mark:Mark) -> Void
+}
 
-
+//   Scribble delegate for against last revocation
+protocol ScribbleRevocationAgainstDelegate:NSObjectProtocol {
+    func revocationAgainst(scribble:Scribble?, manager:UndoManager, mark:Mark) -> Void
+}
 
 class Scribble: NSObject {
+    
+    ///  revocation manager
+    let manager:UndoManager = UndoManager()
+    
+    ///  revocation delegate
+    weak var revocationDelegate:ScribbleRevocationDelegate?
+    ///  against revocation delegate
+    weak var revocationAgainstDelegate:ScribbleRevocationAgainstDelegate?
+    
     
     fileprivate var parentMark_:Mark         // mark's root node
     fileprivate var incrementalMark_:Mark?   //use to sign incremental mark
@@ -35,16 +51,19 @@ class Scribble: NSObject {
         super.init()
     }
     
+//    init(manager:UndoManager?) {
+//        manager = UndoManager()
+//        parentMark_ = Stroke()
+//        super.init()
+//    }
     
-    init(memento:ScribbleMemento) {
-        
+    init(memento:ScribbleMemento, manager:UndoManager?) {
         if memento.hasCompleteSnapshot {
             parentMark_ = memento.mark
         } else {
             parentMark_ = Stroke()
         }
         super.init()
-        
         if !memento.hasCompleteSnapshot {
             attachState(from: memento)
         }
@@ -73,6 +92,8 @@ class Scribble: NSObject {
         } else {
             parentMark_.add(mark: amark)
             incrementalMark_ = amark
+            //   this handle revocation
+            revocationDelegate?.revocation(scribble: self, manager: manager, mark: amark)
         }
         didChangeValue(forKey: "mark")
     }
@@ -84,6 +105,8 @@ class Scribble: NSObject {
         }
         willChangeValue(forKey: "mark")
         parentMark_.remove(mark: mark)
+        //   this handle against revocation
+        revocationAgainstDelegate?.revocationAgainst(scribble: self, manager: manager, mark: mark)
         didChangeValue(forKey: "mark")
         guard let equal = incrementalMark_?.equal(other: mark) else {
             return
@@ -106,6 +129,8 @@ class Scribble: NSObject {
     }
     
 }
+
+
 
 
 

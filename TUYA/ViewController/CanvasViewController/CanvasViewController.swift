@@ -70,15 +70,12 @@ extension CanvasViewController {
             let newStroke = Stroke()
             newStroke.color = strokeColor
             newStroke.size = size_
-            undoManager?.registerUndo(withTarget: self, selector: #selector(remove(obj:)), object: newStroke)
-            //            undoManager?.prepare(withInvocationTarget: scribble)
             scribble.add(amark: newStroke, shouldAddToPreviousMark: false)
         }
         let point = touches.first?.location(in: canvasView)
         guard let thisPoint = point else { return   }
         let vertex = Vertex(location: thisPoint)
         
-        //        undoManager?.registerUndo(withTarget: self, selector: #selector(remove(obj:)), object: vertex)
         scribble.add(amark: vertex, shouldAddToPreviousMark: true)
     }
     @objc func remove(obj:NSObject) -> Void {
@@ -86,7 +83,6 @@ extension CanvasViewController {
         guard let mark = obj as? Mark else {return}
         
         scribble.remove(mark: mark)
-        undoManager?.registerUndo(withTarget: self, selector: #selector(add(obj:)), object: mark)
     }
     @objc func add(obj:NSObject) -> Void {
         guard let mark = obj as? Mark else {return}
@@ -150,10 +146,12 @@ extension CanvasViewController {
         let setItem = CommandBarButtonItem(command: setCommand, image: UIImage(named: "palette.png"), style: .done, target: CoordinatingController.default, action: #selector(CoordinatingController.requestChange(button:)), title: nil)
         
         let undoCommand = UndoCommand(delegate: self)
+        scribble.revocationDelegate = undoCommand
         //        undo
         let undoItem = CommandBarButtonItem(command: undoCommand, image: UIImage(named: "undo.png"), style: .done, target: CoordinatingController.default, action: #selector(CoordinatingController.requestChange(button:)), title: nil)
         //        redo
         let redoCommand = RedoCommand(delegate: self)
+        scribble.revocationAgainstDelegate = redoCommand
         let redoItem = CommandBarButtonItem(command: redoCommand, image: UIImage(named: "redo.png"), style: .done, target: CoordinatingController.default, action: #selector(CoordinatingController.requestChange(button:)), title: nil)
         //        flex
         let flexItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: self, action: nil)
@@ -165,13 +163,13 @@ extension CanvasViewController {
 //MARK:-RedoCommandDelegate
 extension CanvasViewController:RedoCommandDelegate {
     func redo(command:Command) -> Void {
-        undoManager?.redo()
+        scribble.manager.redo()
     }
 }
 //MARK:-UndoCommandDelegate
 extension CanvasViewController:UndoCommandDelegate {
     func undo(command:Command) -> Void {
-        undoManager?.undo()
+        scribble.manager.undo()
     }
 }
 //MARK:- privae

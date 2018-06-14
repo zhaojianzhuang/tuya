@@ -134,7 +134,7 @@ extension ScribbleManager {
         
         do {
              let scribbleMemento = try ScribbleMemento(data: fileContent)
-            return  Scribble(memento: scribbleMemento)
+            return  Scribble(memento: scribbleMemento, manager:nil)
         } catch  {
             throw error
         }

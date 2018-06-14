@@ -21,6 +21,9 @@ class RedoCommand: NSObject, Command {
     
     var userinfo: [String : Any]?
     
+    //    record scribble
+    var scribble:Scribble?
+    
     init(delegate:RedoCommandDelegate?) {
         self.delegate = delegate
         super.init()
@@ -34,3 +37,21 @@ class RedoCommand: NSObject, Command {
         
     }
 }
+//MARK:- private
+extension RedoCommand {
+    @objc fileprivate func revocationAgainst(obj:NSObject) -> Void {
+        guard let mark = obj as? Mark else {return}
+        scribble?.add(amark: mark)
+    }
+}
+//MARK:-ScribbleRevocationAgainstDelegate
+extension RedoCommand:ScribbleRevocationAgainstDelegate {
+    func revocationAgainst(scribble: Scribble?, manager: UndoManager, mark: Mark) {
+        if self.scribble == nil {
+            self.scribble = scribble
+        }
+        manager.registerUndo(withTarget: self, selector: #selector(revocationAgainst(obj:)), object: mark)
+    }
+    
+}
+

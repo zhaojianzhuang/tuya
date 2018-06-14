@@ -31,7 +31,7 @@ class ScribbleThumbnailViewImageProxy: ScribbleThumbnailView {
         guard let data = contents else { throw ProxyError.dataEmpty }
         do {
             let scribble = try ScribbleMemento.memento(data: data)
-            return Scribble(memento: scribble)
+            return Scribble(memento: scribble, manager: nil)
         } catch {
             throw error
         }

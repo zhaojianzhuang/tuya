@@ -19,6 +19,9 @@ import UIKit
 class UndoCommand:NSObject, Command {
 //
     var userinfo: [String : Any]?
+//    record scribble
+    var scribble:Scribble?
+    
 //    delegate
     weak var delegate:UndoCommandDelegate?
     
@@ -35,4 +38,23 @@ class UndoCommand:NSObject, Command {
         
     }
 }
+//MARK:- private
+extension UndoCommand {
+    @objc fileprivate func revocation(obj:NSObject) -> Void {
+        guard let mark = obj as? Mark else {return}
+        scribble?.remove(mark: mark)
+//        scribble?.revocationAgainstDelegate?.revocationAgainst(scribble: scribble, manager: manager, mark: mark)
+    }
+}
+//MARK:- ScribbleRevocationDelegate
+extension UndoCommand:ScribbleRevocationDelegate {
+    func revocation(scribble: Scribble?, manager: UndoManager, mark: Mark) {
+        if self.scribble == nil {
+            self.scribble = scribble
+        }
+
+        manager.registerUndo(withTarget: self, selector: #selector(revocation(obj:)), object: mark)
+    }
+}
+
 
