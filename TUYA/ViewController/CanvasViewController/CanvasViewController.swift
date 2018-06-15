@@ -10,6 +10,7 @@ import UIKit
 
 class CanvasViewController: UIViewController {
     
+    ///  mark size outside
     var size:CGFloat {
         set {
             if newValue < 5.0 {
@@ -22,21 +23,44 @@ class CanvasViewController: UIViewController {
             return size_
         }
     }
+    
+    ///  current stroke color
     var strokeColor:UIColor?
     
+    ///  because this controller's scribble must be observer
+    ///  so we use scrible_ inner and use scribble outside
+    ///  in scribble set method, we add the observer
+    
+    ///  visit inner
+    fileprivate var scribble_ = Scribble()
+    ///  visit outside
+    var scribble:Scribble {
+        set {
+            scribble_.clear()
+            scribble_.add(amark: newValue.mark as! Mark)
+//            scribble_.add(amark: newValue)
+            
+//            scribble_.addObserver(self, forKeyPath: "mark", options: NSKeyValueObservingOptions.new, context: nil)
+        }
+        get {
+           return scribble_
+        }
+    }
     
     let toolbar_Hegiht:CGFloat = 60
-    var scribble = Scribble()
+    
     var canvasView:CanvasView?
-    //    fileprivate var color_:UIColor?
+    
+    ///  mark size inner
     fileprivate var size_:CGFloat = 5.0
     
     fileprivate var startPoint_:CGPoint?
     fileprivate var endPoint_:CGPoint?
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        scribble.addObserver(self, forKeyPath: "mark", options: NSKeyValueObservingOptions.new, context: nil)
+        scribble_.addObserver(self, forKeyPath: "mark", options: NSKeyValueObservingOptions.new, context: nil)
         loadCanvasView(type: CanvasViewType.cloth)
         initToolbar()
         
@@ -53,7 +77,7 @@ class CanvasViewController: UIViewController {
 //MARK:- override
 extension CanvasViewController {
     func clearScribble() -> Void {
-        scribble.clear()
+        scribble_.clear()
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         startPoint_ = touches.first?.location(in: canvasView)
@@ -70,23 +94,23 @@ extension CanvasViewController {
             let newStroke = Stroke()
             newStroke.color = strokeColor
             newStroke.size = size_
-            scribble.add(amark: newStroke, shouldAddToPreviousMark: false)
+            scribble_.add(amark: newStroke, shouldAddToPreviousMark: false)
         }
         let point = touches.first?.location(in: canvasView)
         guard let thisPoint = point else { return   }
         let vertex = Vertex(location: thisPoint)
         
-        scribble.add(amark: vertex, shouldAddToPreviousMark: true)
+        scribble_.add(amark: vertex, shouldAddToPreviousMark: true)
     }
     @objc func remove(obj:NSObject) -> Void {
         //        scribble.remove(mark: mark)
         guard let mark = obj as? Mark else {return}
         
-        scribble.remove(mark: mark)
+        scribble_.remove(mark: mark)
     }
     @objc func add(obj:NSObject) -> Void {
         guard let mark = obj as? Mark else {return}
-        scribble.add(amark: mark)
+        scribble_.add(amark: mark)
         undoManager?.registerUndo(withTarget: self, selector: #selector(remove(obj:)), object: mark)
     }
     
@@ -102,7 +126,7 @@ extension CanvasViewController {
             singleDot.color = strokeColor
             singleDot.size = size_
             undoManager?.registerUndo(withTarget: self, selector: #selector(remove(obj:)), object: singleDot)
-            scribble.add(amark: singleDot, shouldAddToPreviousMark: false)
+            scribble_.add(amark: singleDot, shouldAddToPreviousMark: false)
         }
         startPoint_ = CGPoint.zero
     }
@@ -121,11 +145,8 @@ extension CanvasViewController {
     }
 }
 
-
+//MARK: -private
 extension CanvasViewController {
-    @objc fileprivate func barButtonItem(_ sender:UIBarButtonItem) -> Void{
-        //        CoordinatingController.default.requestChange(button: sender)
-    }
     fileprivate func initToolbar()->Void {
         let toolbar = UIToolbar(frame: CGRect(x: 0,
                                               y: SCREEN_Height - toolbar_Hegiht,
@@ -139,19 +160,20 @@ extension CanvasViewController {
         //        save
         let saveItem = CommandBarButtonItem(command: saveCommand, image: UIImage(named: "save.png"), style: .done, target: CoordinatingController.default, action: #selector(CoordinatingController.requestChange(button:)), title: nil)
         //        open
-        let openItem = CommandBarButtonItem(command: nil, image: UIImage(named: "open.png"), style: .done, target: CoordinatingController.default, action: #selector(CoordinatingController.requestChange(button:)), title: nil)
+        let openCommand = OpenThumbnailCommand()
+        let openItem = CommandBarButtonItem(command: openCommand, image: UIImage(named: "open.png"), style: .done, target: CoordinatingController.default, action: #selector(CoordinatingController.requestChange(button:)), title: nil)
         
         let setCommand = OpenSetCommand()
         //        set
         let setItem = CommandBarButtonItem(command: setCommand, image: UIImage(named: "palette.png"), style: .done, target: CoordinatingController.default, action: #selector(CoordinatingController.requestChange(button:)), title: nil)
         
         let undoCommand = UndoCommand(delegate: self)
-        scribble.revocationDelegate = undoCommand
+        scribble_.revocationDelegate = undoCommand
         //        undo
         let undoItem = CommandBarButtonItem(command: undoCommand, image: UIImage(named: "undo.png"), style: .done, target: CoordinatingController.default, action: #selector(CoordinatingController.requestChange(button:)), title: nil)
         //        redo
         let redoCommand = RedoCommand(delegate: self)
-        scribble.revocationAgainstDelegate = redoCommand
+        scribble_.revocationAgainstDelegate = redoCommand
         let redoItem = CommandBarButtonItem(command: redoCommand, image: UIImage(named: "redo.png"), style: .done, target: CoordinatingController.default, action: #selector(CoordinatingController.requestChange(button:)), title: nil)
         //        flex
         let flexItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: self, action: nil)
@@ -163,13 +185,13 @@ extension CanvasViewController {
 //MARK:-RedoCommandDelegate
 extension CanvasViewController:RedoCommandDelegate {
     func redo(command:Command) -> Void {
-        scribble.manager.redo()
+        scribble_.manager.redo()
     }
 }
 //MARK:-UndoCommandDelegate
 extension CanvasViewController:UndoCommandDelegate {
     func undo(command:Command) -> Void {
-        scribble.manager.undo()
+        scribble_.manager.undo()
     }
 }
 //MARK:- privae

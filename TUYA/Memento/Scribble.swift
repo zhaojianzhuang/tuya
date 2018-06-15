@@ -51,12 +51,6 @@ class Scribble: NSObject {
         super.init()
     }
     
-//    init(manager:UndoManager?) {
-//        manager = UndoManager()
-//        parentMark_ = Stroke()
-//        super.init()
-//    }
-    
     init(memento:ScribbleMemento, manager:UndoManager?) {
         if memento.hasCompleteSnapshot {
             parentMark_ = memento.mark
@@ -72,7 +66,9 @@ class Scribble: NSObject {
     //    clear all mark
     func clear() -> Void {
         willChangeValue(forKey: "mark")
-        parentMark_ = Stroke()
+        let mark = parentMark_.copy() as! Mark
+        parentMark_.removeAll()
+        revocationAgainstDelegate?.revocationAgainst(scribble: self, manager: manager, mark: mark)
         incrementalMark_ = parentMark_
         didChangeValue(forKey: "mark")
     }
@@ -97,6 +93,13 @@ class Scribble: NSObject {
         }
         didChangeValue(forKey: "mark")
     }
+    
+    func add(marks:[Mark]) -> Void {
+        for mark in marks {
+            parentMark_.add(mark: mark)
+        }
+    }
+    
     //    remvoe a mark
     func remove(mark:Mark) -> Void {
         if mark.equal(other: parentMark_) {
@@ -108,13 +111,6 @@ class Scribble: NSObject {
         //   this handle against revocation
         revocationAgainstDelegate?.revocationAgainst(scribble: self, manager: manager, mark: mark)
         didChangeValue(forKey: "mark")
-        guard let equal = incrementalMark_?.equal(other: mark) else {
-            return
-        }
-        if equal {
-            incrementalMark_ = nil
-        }
-        
     }
     
     //
@@ -129,6 +125,7 @@ class Scribble: NSObject {
     }
     
 }
+
 
 
 

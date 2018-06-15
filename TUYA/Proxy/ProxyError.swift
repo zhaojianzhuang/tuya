@@ -8,6 +8,6 @@
 
 import UIKit
 enum ProxyError:Error {
-    case dataEmpty
+    case dataEmpty   // data empty
 }
 

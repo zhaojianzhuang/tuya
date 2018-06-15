@@ -18,7 +18,14 @@ class SaveScribbleCommand: NSObject{
 extension SaveScribbleCommand:Command {
     func execute() -> Void {
         let canvasVC = CoordinatingController.default.canvasViewController
-//        canvasVC.s
+        let currentImage = canvasVC.canvasView?.image()
+        guard let image = currentImage  else {
+            print("save image is nil")
+            return
+        }
+        
+        let scribble = canvasVC.scribble
+        ScribbleManager.default.save(scribble: scribble, thumbnail: image)
     }
     
     func undo() -> Void {

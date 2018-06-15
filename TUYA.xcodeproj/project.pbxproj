@@ -55,6 +55,9 @@
 		22B96F0820C65DBA001B02E1 /* CoordinatingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B96EF220C65DBA001B02E1 /* CoordinatingController.swift */; };
 		22B96F0920C65DBA001B02E1 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 22B96EF320C65DBA001B02E1 /* Info.plist */; };
 		22B96F0B20C65E10001B02E1 /* ConstantQuantity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B96F0A20C65E10001B02E1 /* ConstantQuantity.swift */; };
+		22C2C1D320D358510068BC44 /* UIView+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C2C1D220D358510068BC44 /* UIView+Image.swift */; };
+		22C2C1D520D387AE0068BC44 /* OpenThumbnailCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C2C1D420D387AE0068BC44 /* OpenThumbnailCommand.swift */; };
+		22C2C1D720D38C170068BC44 /* ThumbnailCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C2C1D620D38C170068BC44 /* ThumbnailCollectionViewCell.swift */; };
 		22D8FA6720D0F77100CCE029 /* ColorChangeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D8FA6620D0F77100CCE029 /* ColorChangeView.swift */; };
 		22D8FA6920D102C200CCE029 /* SizeChangeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D8FA6820D102C200CCE029 /* SizeChangeView.swift */; };
 		22D8FA6B20D10F7100CCE029 /* StrokeColorCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D8FA6A20D10F7100CCE029 /* StrokeColorCommand.swift */; };
@@ -115,6 +118,9 @@
 		22B96EF220C65DBA001B02E1 /* CoordinatingController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoordinatingController.swift; sourceTree = "<group>"; };
 		22B96EF320C65DBA001B02E1 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		22B96F0A20C65E10001B02E1 /* ConstantQuantity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstantQuantity.swift; sourceTree = "<group>"; };
+		22C2C1D220D358510068BC44 /* UIView+Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Image.swift"; sourceTree = "<group>"; };
+		22C2C1D420D387AE0068BC44 /* OpenThumbnailCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenThumbnailCommand.swift; sourceTree = "<group>"; };
+		22C2C1D620D38C170068BC44 /* ThumbnailCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbnailCollectionViewCell.swift; sourceTree = "<group>"; };
 		22D8FA6620D0F77100CCE029 /* ColorChangeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorChangeView.swift; sourceTree = "<group>"; };
 		22D8FA6820D102C200CCE029 /* SizeChangeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SizeChangeView.swift; sourceTree = "<group>"; };
 		22D8FA6A20D10F7100CCE029 /* StrokeColorCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrokeColorCommand.swift; sourceTree = "<group>"; };
@@ -191,6 +197,7 @@
 				2280AA1C20D2365800821EF2 /* DismissCommand.swift */,
 				2280AA2020D253E200821EF2 /* UndoCommand.swift */,
 				2280AA2420D254D300821EF2 /* RedoCommand.swift */,
+				22C2C1D420D387AE0068BC44 /* OpenThumbnailCommand.swift */,
 			);
 			path = Command;
 			sourceTree = "<group>";
@@ -272,6 +279,7 @@
 			isa = PBXGroup;
 			children = (
 				22B96F0A20C65E10001B02E1 /* ConstantQuantity.swift */,
+				22C2C1D220D358510068BC44 /* UIView+Image.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -285,6 +293,7 @@
 				22D8FA6620D0F77100CCE029 /* ColorChangeView.swift */,
 				22D8FA6820D102C200CCE029 /* SizeChangeView.swift */,
 				2280AA1620D2049600821EF2 /* CommandBarButtonItem.swift */,
+				22C2C1D620D38C170068BC44 /* ThumbnailCollectionViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -452,8 +461,10 @@
 				22A0AA3220C94AF300783CC9 /* MarkVisitor.swift in Sources */,
 				2280AA1B20D2127100821EF2 /* OpenSetCommand.swift in Sources */,
 				22B96F0B20C65E10001B02E1 /* ConstantQuantity.swift in Sources */,
+				22C2C1D320D358510068BC44 /* UIView+Image.swift in Sources */,
 				22B96F0820C65DBA001B02E1 /* CoordinatingController.swift in Sources */,
 				22A0AA2420C9003400783CC9 /* CanvasView.swift in Sources */,
+				22C2C1D520D387AE0068BC44 /* OpenThumbnailCommand.swift in Sources */,
 				22B96EF420C65DBA001B02E1 /* ViewController.swift in Sources */,
 				22B96F0720C65DBA001B02E1 /* CanvasViewController.swift in Sources */,
 				22A0AA2B20C923BC00783CC9 /* Command.swift in Sources */,
@@ -469,6 +480,7 @@
 				22DA94C120C7B44B00F91322 /* Dot.swift in Sources */,
 				22D8FA6720D0F77100CCE029 /* ColorChangeView.swift in Sources */,
 				2280AA1920D20F1B00821EF2 /* CommandButtonProtocol.swift in Sources */,
+				22C2C1D720D38C170068BC44 /* ThumbnailCollectionViewCell.swift in Sources */,
 				22DA94C620C7C42200F91322 /* Scribble.swift in Sources */,
 				2280AA2720D2927800821EF2 /* MarkError.swift in Sources */,
 				2280AA1720D2049600821EF2 /* CommandBarButtonItem.swift in Sources */,

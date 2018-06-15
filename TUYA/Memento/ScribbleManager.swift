@@ -47,8 +47,8 @@ class ScribbleManager: NSObject {
     //    the file under thumail dir
     fileprivate var thumbnailPaths:[String]? {
         let fileManager = FileManager.default
-        if fileManager.fileExists(atPath: THUMBNAILSDIR) {
-            let paths = try? FileManager.default.contentsOfDirectory(atPath: THUMBNAILSDIR)
+        if fileManager.fileExists(atPath: thumbnailPath) {
+            let paths = try? FileManager.default.contentsOfDirectory(atPath: thumbnailPath)
             return paths
         }
         return nil
@@ -84,6 +84,8 @@ extension ScribbleManager {
         let scribleDataName = "data_\(newIndex)"
         let thumbnailName = "thumbnail_\(newIndex)"
         
+        let thumbnailPath = (self.thumbnailPath as NSString).appendingPathComponent(thumbnailName)
+        let scribblePath = (self.dataPath as NSString).appendingPathComponent(scribleDataName)
         guard let scribleMemento = scribble.scribbleMemento else {
             print("save occur error with scrible")
             return
@@ -91,7 +93,7 @@ extension ScribbleManager {
         let scribleData = scribleMemento.data()
         
         do {
-            try scribleData.write(to: URL.init(fileURLWithPath: scribleDataName))
+            try scribleData.write(to: URL.init(fileURLWithPath: scribblePath))
         }
         catch {
             print("save scrible error occur:\(error)")
@@ -104,7 +106,7 @@ extension ScribbleManager {
         }
         
         do {
-            try imageData.write(to: URL.init(fileURLWithPath: thumbnailName))
+            try imageData.write(to: URL.init(fileURLWithPath: thumbnailPath))
         }
         catch {
             print("save thunail error occur:\(error)")

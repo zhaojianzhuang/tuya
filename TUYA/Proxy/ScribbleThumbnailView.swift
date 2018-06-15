@@ -16,13 +16,6 @@ class ScribbleThumbnailView: UIView, ScribbleSource {
     var imagePath:String?
     var scrible:Scribble?
     
-
-    
-//    init(path:String) {
-//        scribblePath_ = path
-//        image_ = UIImage(contentsOfFile: scribblePath_)!
-//        super.init()
-//    }
     
     func scribble() throws -> Scribble {
         fatalError("abstrace class")

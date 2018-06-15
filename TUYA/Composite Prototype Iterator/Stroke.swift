@@ -79,9 +79,13 @@ extension Stroke {
     func add(mark: Mark) {
         children_.append(mark)
     }
+    //    remove all
+    func removeAll() -> Void {
+        children_.removeAll()
+    }
     
     //    delete mark
-    func remove(mark: Mark) {
+    func remove(mark: Mark) -> Void {
         var index = -1
         
         for i in 0..<children_.count {
@@ -90,6 +94,11 @@ extension Stroke {
                 break
             }
         }
+        if index == -1 {
+            print("不存在的点")
+            return
+        }
+
         children_.remove(at: index)
     }
     

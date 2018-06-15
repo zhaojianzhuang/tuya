@@ -8,6 +8,8 @@
 
 import UIKit
 class Vertex:NSObject, Mark {
+
+    
     
     var color: UIColor?
     var size: CGFloat=5.0
@@ -37,7 +39,10 @@ class Vertex:NSObject, Mark {
         }
         return true
     }
-    
+//    dot and vertex can not use this 
+    func removeAll() -> Void {
+        
+    }
     //    draw
     func draw(context: CGContext) -> Void  {
         context.addLine(to: location)

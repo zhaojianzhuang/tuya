@@ -31,9 +31,13 @@ protocol Mark: NSCoding, NSCopying {
     ///    vertex and dot can not
     func add(mark:Mark) -> Void
     
-    ///    add a mark that stroke can use
+    ///    remove a mark that in stroke
     ///    vertex and dot can not
     func remove(mark:Mark) -> Void
+    
+    ///    remove all mark in stroke
+    ///    vertex and dot can not
+    func removeAll() -> Void
     
     ///    the index of mark in the node
     ///    like top only can stroke can use

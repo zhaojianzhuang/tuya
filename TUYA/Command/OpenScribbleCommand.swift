@@ -16,19 +16,18 @@ class OpenScribbleCommand<T>: Command where T:ScribbleSource {
     
     var userinfo: [String : Any]?
     
-    func execute() {
+    func execute() -> Void {
         do {
             let scribble = try aScribbleSource_.scribble()
             let coordinateVC = CoordinatingController.default
             coordinateVC.canvasViewController.scribble = scribble
-            
-//            coordinateVC.requestChange(object: self)
+            coordinateVC.activeViewController.dismiss(animated: true, completion: nil)
         } catch  {
             print("\(error)")
         }
     }
     
-    func undo() {
+    func undo() -> Void {
         
     }
     

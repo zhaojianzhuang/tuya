@@ -46,6 +46,7 @@ class ScribbleThumbnailViewImageProxy: ScribbleThumbnailView {
             context?.addRect(rect)
             context?.drawPath(using: .fillStroke)
             if !loadingThreadHasLaunched_ {
+                
                 self.performSelector(inBackground: #selector(forwardImageLoadingThread), with: nil)
                 loadingThreadHasLaunched_ = true
             }
@@ -53,10 +54,12 @@ class ScribbleThumbnailViewImageProxy: ScribbleThumbnailView {
             realImage_?.draw(in: rect)
         }
     }
+    
     @objc func forwardImageLoadingThread() -> Void {
         let _ = self.image
-        self.setNeedsDisplay()
-//        self.performSelector(inBackground: #selector(setNeedsDisplay), with: nil)
+        DispatchQueue.main.sync {
+            setNeedsDisplay()
+        }
     }
     
     
